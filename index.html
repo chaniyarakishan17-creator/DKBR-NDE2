@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Responsive Design</title>
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .dk-braende-site {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Top Green Bar */
+    .top-bar {
+      background-color: #4a7c2f;
+      height: 15px;
+      width: 100%;
+    }
+
+    /* Header */
+    .header {
+      background-color: white;
+      padding: 20px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo svg {
+      height: 50px;
+      width: auto;
+    }
+
+    .logo img {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      align-items: flex-end;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .header-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #999;
+      text-decoration: none;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .header-link .icon {
+      font-size: 16px;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-right: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .search-bar button {
+      padding: 8px 15px;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: #4a7c2f;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Navigation */
+    .nav {
+      background-color: #4a7c2f;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      justify-content: center;
+    }
+
+    .nav-list li {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    .nav-list a {
+      display: block;
+      padding: 15px 12px;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      white-space: nowrap;
+    }
+
+    .nav-list a:hover {
+      background-color: #3d6626;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 30px 0;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 30px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background-color: white;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .hero-image {
+      position: relative;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-overlay {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 40px;
+      text-align: center;
+      border-radius: 10px;
+      max-width: 600px;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      color: #4a7c2f;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .hero-subtitle {
+      font-size: 24px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 15px 40px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      border-radius: 3px;
+    }
+
+    .btn-primary {
+      background-color: #4a7c2f;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #3d6626;
+    }
+
+    .btn-secondary {
+      background-color: #4a7c2f;
+      color: white;
+      width: 100%;
+    }
+
+    .btn-secondary:hover {
+      background-color: #3d6626;
+    }
+
+    .btn-tertiary {
+      background-color: #e0e0e0;
+      color: #333;
+      padding: 10px 20px;
+    }
+
+    /* Product Categories */
+    .product-categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .product-card {
+      position: relative;
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 20px;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    .product-card h3 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .product-ribbon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #f0a020;
+      color: white;
+      padding: 30px 15px 15px 15px;
+      font-size: 10px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 1.3;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+      min-width: 80px;
+    }
+
+    .product-image {
+      margin: 30px 0;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 5px;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .product-image .image-fallback {
+      width: 100%;
+      height: 180px;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+    }
+
+    .firewood-icon,
+    .pellets-icon,
+    .briquettes-icon {
+      font-size: 80px;
+    }
+
+    /* Quality Section */
+    .quality-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      padding: 30px;
+      background-color: #f8f8f8;
+      margin-top: 20px;
+    }
+
+    .quality-content {
+      padding: 20px;
+    }
+
+    .quality-title {
+      font-size: 32px;
+      color: #2d5016;
+      font-weight: bold;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .quality-text {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .quality-certified {
+      background-color: #e8e8e8;
+      padding: 30px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .certified-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .certified-text {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Phone Card */
+    .phone-card h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .phone-card .highlight {
+      color: #4a7c2f;
+    }
+
+    .phone-hours {
+      margin-bottom: 20px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .phone-number {
+      font-size: 32px;
+      font-weight: bold;
+      color: #4a7c2f;
+      text-align: center;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+    }
+
+    /* Newsletter Card */
+    .newsletter-card h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .newsletter-card p {
+      font-size: 14px;
+      margin-bottom: 15px;
+      color: #666;
+    }
+
+    .newsletter-card form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .newsletter-card input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+    /* Payment Card */
+    .payment-card h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .payment-icons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .payment-icon {
+      background-color: #f5f5f5;
+      border-radius: 5px;
+      padding: 10px;
+      overflow: hidden;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .payment-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .payment-icon .image-fallback {
+      width: 100%;
+      height: 100%;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Trustpilot Card */
+    .trustpilot-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .trustpilot-star {
+      font-size: 32px;
+      color: #00b67a;
+    }
+
+    .trustpilot-text {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .trustpilot-stars {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .star-box {
+      background-color: #00b67a;
+      color: white;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      border-radius: 3px;
+    }
+
+    .trustpilot-score {
+      font-size: 14px;
+      color: #666;
+      text-align: left;
+    }
+
+    .trustpilot-score strong {
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* E-mærket Card */
+    .emaerket-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px;
+      background: linear-gradient(135deg, #0099cc 0%, #00cccc 100%);
+      border-radius: 5px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      justify-content: center;
+    }
+
+    .eye-logo {
+      font-size: 40px;
+    }
+
+    /* Facebook Card */
+    .facebook-link {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-decoration: none;
+      color: #333;
+      padding: 10px;
+    }
+
+    .fb-icon {
+      background-color: #1877f2;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .facebook-link strong {
+      color: #1877f2;
+    }
+
+    /* Badge Card */
+    .badge-logo {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      border-radius: 5px;
+    }
+
+    .badge-logo img {
+      width: 100%;
+      height: auto;
+      max-height: 120px;
+      object-fit: contain;
+    }
+
+    .badge-logo .image-fallback {
+      width: 100%;
+      height: 120px;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge-text {
+      font-size: 16px;
+      font-weight: bold;
+      color: #d32f2f;
+      line-height: 1.2;
+    }
+
+    .badge-subtext {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* Info Section */
+    .info-section {
+      background-color: white;
+      padding: 30px 0;
+      margin-top: 30px;
+    }
+
+    .info-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .info-icon {
+      font-size: 48px;
+    }
+
+    .info-card h3 {
+      font-size: 20px;
+      color: #333;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: block;
+      }
+
+      .nav {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .nav-open {
+        max-height: 600px;
+      }
+
+      .nav-list {
+        flex-direction: column;
+      }
+
+      .nav-list li {
+        width: 100%;
+      }
+
+      .header-content {
+        justify-content: space-between;
+      }
+
+      .header-right {
+        order: 3;
+        width: 100%;
+        align-items: stretch;
+      }
+
+      .header-icons {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .search-bar {
+        max-width: 100%;
+      }
+
+      .hero-title {
+        font-size: 32px;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+      }
+
+      .hero-overlay {
+        padding: 20px;
+      }
+
+      .product-categories {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .quality-section {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .quality-content {
+        padding: 10px;
+      }
+
+      .quality-title {
+        font-size: 24px;
+      }
+
+      .sidebar {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .hero-image {
+        height: 300px;
+      }
+
+      .phone-number {
+        font-size: 24px;
+      }
+
+      .header-link {
+        font-size: 10px;
+      }
+
+      .logo svg {
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dk-braende-site">
+    <!-- Top Green Bar -->
+    <div class="top-bar"></div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <img 
+              src="https://images.unsplash.com/photo-1738417281890-20775ffd331b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b29kJTIwY29tcGFueSUyMGxvZ298ZW58MXx8fHwxNzY3ODQ3NTg4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+              alt="DK Firewood Logo"
+              onerror="handleImageError(this)"
+            />
+          </div>
+          <div class="header-right">
+            <div class="header-icons">
+              <a href="#" class="header-link">
+                <span class="icon">💬</span>
+                <span>Support</span>
+              </a>
+              <a href="#" class="header-link">
+                <span class="icon">👤</span>
+                <span>Login</span>
+              </a>
+              <a href="#" class="header-link">
+                <span class="icon">🛒</span>
+                <span>Cart</span>
+              </a>
+            </div>
+            <div class="search-bar">
+              <input type="text" placeholder="Search..." />
+              <button>🔍</button>
+            </div>
+          </div>
+          <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+      <div class="container">
+        <ul class="nav-list">
+          <li><a href="#">CURRENT OFFERS</a></li>
+          <li><a href="#">PACKAGE SOLUTIONS</a></li>
+          <li><a href="#">DELIVERY</a></li>
+          <li><a href="#">FIREWOOD</a></li>
+          <li><a href="#">WOOD PELLETS</a></li>
+          <li><a href="#">WOOD BRIQUETTES</a></li>
+          <li><a href="#">BEDDING</a></li>
+          <li><a href="#">WAREHOUSE SALE</a></li>
+          <li><a href="#">ACCESSORIES</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <div class="content-grid">
+          <!-- Hero Section -->
+          <section class="hero-section">
+            <div class="hero-image" style="background-image: url('src/assets/5389f0bc10b60cbe6c4be18c041575a836f58a78.png')">
+              <div class="hero-overlay">
+                <h1 class="hero-title">Quality Firewood</h1>
+                <p class="hero-subtitle">- See if you can get free delivery</p>
+                <div class="hero-buttons">
+                  <button class="btn btn-primary">DELIVERY</button>
+                  <button class="btn btn-primary">WAREHOUSE SALE</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product Categories -->
+            <div class="product-categories">
+              <!-- Product 1: Firewood -->
+              <div class="product-card">
+                <div class="product-ribbon">
+                  FREE<br />DELIVERY
+                </div>
+                <h3>Firewood</h3>
+                <div class="product-image">
+                  <img 
+                    src="https://images.unsplash.com/photo-1571040195944-85a412548a43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXJld29vZCUyMGxvZ3MlMjBzdGFja3xlbnwxfHx8fDE3Njc4NDc0OTF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    alt="Firewood"
+                    onerror="handleImageError(this)"
+                  />
+                </div>
+                <button class="btn btn-secondary">SEE SELECTION</button>
+              </div>
+
+              <!-- Product 2: Wood Pellets -->
+              <div class="product-card">
+                <div class="product-ribbon">
+                  CALL FOR<br />BULK PRICE
+                </div>
+                <h3>Wood Pellets</h3>
+                <div class="product-image">
+                  <img 
+                    src="https://images.unsplash.com/photo-1644594360289-7da721932609?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b29kJTIwcGVsbGV0c3xlbnwxfHx8fDE3Njc4NDc0OTF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    alt="Wood Pellets"
+                    onerror="handleImageError(this)"
+                  />
+                </div>
+                <button class="btn btn-secondary">SEE SELECTION</button>
+              </div>
+
+              <!-- Product 3: Briquettes -->
+              <div class="product-card">
+                <h3>Briquettes</h3>
+                <div class="product-image">
+                  <img 
+                    src="https://images.unsplash.com/photo-1656260095692-a3e2fa81c104?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b29kJTIwYnJpcXVldHRlcyUyMGZ1ZWx8ZW58MXx8fHwxNzY3ODQ3NDkxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    alt="Briquettes"
+                    onerror="handleImageError(this)"
+                  />
+                </div>
+                <button class="btn btn-secondary">SEE SELECTION</button>
+              </div>
+            </div>
+
+            <!-- Quality You Can Trust Section -->
+            <div class="quality-section">
+              <div class="quality-content">
+                <h2 class="quality-title">Quality You Can Trust</h2>
+                <p class="quality-text">
+                  At DKBRÆNDE, we believe that fuel should be more than just functional—it should be sustainable, efficient, and delivered with care.
+                </p>
+                <p class="quality-text">
+                  With over 15 years of industry expertise, we've refined our process to bring you kiln-dried wood that ignites instantly and wood pellets with the highest energy density on the market.
+                </p>
+              </div>
+              <div class="quality-certified">
+                <h3 class="certified-title">E-CERTIFIED PARTNER</h3>
+                <p class="certified-text">
+                  Your security is our priority. As a certified e-commerce partner, we guarantee safe transactions, data protection, and transparent shipping policies for every order.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Sidebar -->
+          <aside class="sidebar">
+            <!-- Phone Info -->
+            <div class="sidebar-card phone-card">
+              <h3>We're on the <span class="highlight">phone!</span></h3>
+              <div class="phone-hours">
+                <div class="hours-row">
+                  <span>Monday-Thursday</span>
+                  <span>09:00 - 15:00</span>
+                </div>
+                <div class="hours-row">
+                  <span>Friday</span>
+                  <span>09:00 - 12:00</span>
+                </div>
+              </div>
+              <div class="phone-number">
+                📞 25 32 34 13
+              </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="sidebar-card newsletter-card">
+              <h3>NEWSLETTER</h3>
+              <p>Subscribe to our newsletter.</p>
+              <form id="newsletterForm">
+                <input 
+                  type="email" 
+                  id="newsletterEmail"
+                  placeholder="Your email"
+                  required
+                />
+                <button type="submit" class="btn btn-tertiary">SUBSCRIBE</button>
+              </form>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="sidebar-card payment-card">
+              <h3>Payment Methods</h3>
+              <div class="payment-icons">
+                <div class="payment-icon">
+                  <img 
+                    src="https://images.unsplash.com/photo-1653389527286-604ab2dd2471?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aXNhJTIwY2FyZCUyMGxvZ298ZW58MXx8fHwxNzY3ODEzMjYxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    alt="Visa"
+                    onerror="handleImageError(this)"
+                  />
+                </div>
+                <div class="payment-icon">
+                  <img 
+                    src="https://images.unsplash.com/photo-1740645532569-bc91e06b0663?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXN0ZXJjYXJkJTIwbG9nb3xlbnwxfHx8fDE3Njc4NDc0MTV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    alt="Mastercard"
+                    onerror="handleImageError(this)"
+                  />
+                </div>
+                <div class="payment-icon">
+                  <img 
+                    src="https://images.unsplash.com/photo-1649251855096-f8beda8f6b24?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhbWVyaWNhbiUyMGV4cHJlc3MlMjBjYXJkfGVufDF8fHx8MTc2NzgxMzI2MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    alt="American Express"
+                    onerror="handleImageError(this)"
+                  />
+                </div>
+                <div class="payment-icon">
+                  <img 
+                    src="https://images.unsplash.com/photo-1706879349461-1fdfb4f7d519?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYXlwYWwlMjBsb2dvfGVufDF8fHx8MTc2Nzg0NzQxNXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    alt="PayPal"
+                    onerror="handleImageError(this)"
+                  />
+                </div>
+                <div class="payment-icon">
+                  <img 
+                    src="https://images.unsplash.com/photo-1649734924649-b559375080b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcHBsZSUyMHBheSUyMGxvZ298ZW58MXx8fDE3Njc4MDc5NDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    alt="Apple Pay"
+                    onerror="handleImageError(this)"
+                  />
+                </div>
+                <div class="payment-icon">
+                  <img 
+                    src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVkaXQlMjBjYXJkJTIwcGF5bWVudHxlbnwxfHx8fDE3Njc4MDk5MzN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    alt="Credit Card"
+                    onerror="handleImageError(this)"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Trustpilot -->
+            <div class="sidebar-card trustpilot-card">
+              <div class="trustpilot-header">
+                <span class="trustpilot-star">★</span>
+                <span class="trustpilot-text">Trustpilot</span>
+              </div>
+              <div class="trustpilot-stars">
+                <div class="star-box">★</div>
+                <div class="star-box">★</div>
+                <div class="star-box">★</div>
+                <div class="star-box">★</div>
+                <div class="star-box">★</div>
+              </div>
+              <p class="trustpilot-score">Rated <strong>4.5 / 5</strong> by our family</p>
+            </div>
+
+            <!-- E-mærket -->
+            <div class="sidebar-card emaerket-card">
+              <div class="emaerket-logo">
+                <div class="eye-logo">👁️</div>
+                <span>e-mærket</span>
+              </div>
+            </div>
+
+            <!-- Facebook -->
+            <div class="sidebar-card facebook-card">
+              <a href="#" class="facebook-link">
+                <span class="fb-icon">f</span>
+                <div>
+                  <div>Follow Firewood Co on</div>
+                  <strong>FACEBOOK</strong>
+                </div>
+              </a>
+            </div>
+
+            <!-- Badge -->
+            <div class="sidebar-card badge-card">
+              <div class="badge-logo">
+                <img 
+                  src="https://images.unsplash.com/photo-1630595629460-3ff7566ddc44?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aWxkbGlmZSUyMGNvbnNlcnZhdGlvbiUyMGxvZ298ZW58MXx8fHwxNzY3ODQ3NDE2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                  alt="Wildlife Foundation"
+                  onerror="handleImageError(this)"
+                />
+              </div>
+              <p class="badge-subtext">We support Wildlife Foundation</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Info -->
+    <section class="info-section">
+      <div class="container">
+        <div class="info-card">
+          <div class="info-icon">ℹ️</div>
+          <h3>Firewood Co is e-certified</h3>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Error image fallback (base64 encoded SVG)
+    const ERROR_IMG_SRC = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODgiIGhlaWdodD0iODgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzLjciPjxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjU2IiByeD0iNiIvPjxwYXRoIGQ9Im0xNiA1OCAxNi0xOCAzMiAzMiIvPjxjaXJjbGUgY3g9IjUzIiBjeT0iMzUiIHI9IjciLz48L3N2Zz4KCg==';
+
+    // Image error handler
+    function handleImageError(img) {
+      if (!img.dataset.errorHandled) {
+        img.dataset.errorHandled = 'true';
+        const originalSrc = img.src;
+        const parent = img.parentElement;
+        
+        // Create fallback div
+        const fallback = document.createElement('div');
+        fallback.className = 'image-fallback';
+        fallback.innerHTML = '<img src="' + ERROR_IMG_SRC + '" alt="Error loading image" data-original-url="' + originalSrc + '" />';
+        
+        // Replace the failed image with fallback
+        parent.replaceChild(fallback, img);
+      }
+    }
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const nav = document.getElementById('nav');
+
+    if (mobileMenuToggle && nav) {
+      mobileMenuToggle.addEventListener('click', function() {
+        nav.classList.toggle('nav-open');
+      });
+    }
+
+    // Newsletter form submission
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterEmail = document.getElementById('newsletterEmail');
+
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thanks for subscribing!');
+        if (newsletterEmail) {
+          newsletterEmail.value = '';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
